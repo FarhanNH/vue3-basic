@@ -17,12 +17,18 @@ const items = ref([
   },
 ]);
 const counter = ref(0);
+
+function increment(value) {
+  counter.value += value;
+}
 </script>
 
 <template>
-  <CounterStateless name="John" :counter="counter" />
-  <CounterStateless name="Doe" :counter="counter" />
-  <button @click="counter++">Increase</button>
+  <CounterStateless name="John" :counter="counter" :increment="1" @click="increment" />
+  <CounterStateless name="Doe" :counter="counter" :increment="2" @click="increment" />
+  <!-- <CounterStateless name="John" :counter="counter" @click="() => (counter += 1)" />
+  <CounterStateless name="Doe" :counter="counter" @click="() => (counter += 2)" /> -->
+  <!-- <button @click="counter++">Increase</button> -->
   <div v-for="(item, index) in items" :key="index">
     <Counter :name="item.name" :initial-count="item.initialCount" />
   </div>
